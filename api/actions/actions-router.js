@@ -62,10 +62,9 @@ router.delete('/:id', (req, res) => {
 });
 
 ///// CATCH-ALL /////
-router.use((err, req, res, next) => {
-  res.status(500).json({ message: err.message })
-  next();
-});
+// router.use((err, req, res, next) => {
+//   res.status(500).json({ message: err.message })
+// });
 
 
 module.exports = router;
