@@ -1,17 +1,80 @@
 // Write your "projects" router here!
 const express = require('express');
 
-const Actions = require('../actions/actions-model');
 const Projects = require('./projects-model');
 
 const router = express.Router();
 
+///// ENDPOINTS /////
+router.get('/', (req, res) => {
+  Projects.get()
+    .then((project) => {
+      res.status(200).json(project)
+    })
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json({ message: err.message })
+    })
+})
 
+router.get('/:id', (req, res) => {
+  Projects.get(req.params.id)
+    .then((project) => {
+      res.status(200).json(project)
+    })
+    .catch((err) => {
+      console.timeLog(err)
+      res.status(500).json({ message: err.message })
+    })
+})
 
-// DELETE THESE THREE BEFORE YOU START //
-Actions; 
-Projects;
-router;
+router.post('/', (req, res) => {
+  Projects.insert(req.body)
+    .then((project) => {
+      res.status(201).json(project)
+    })
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json({ message: err.message })
+    })
+})
+
+router.put('/:id', (req, res) => {
+  Projects.update(req.params.id, req.body)
+    .then((id) => {
+      if (id) {
+        res.status(200).json(id)
+      } else {
+        res.status(404).json({ message: "Project with that ID cannot be found." })
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json({ message: err.message })
+    })
+})
+
+router.delete('/:id', (req, res) => {
+  Projects.remove(req.params.id)
+    .then(() => {
+      res.status(200).json({ message: "Project successfully deleted." })
+    })
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json({ message: err.message })
+    })
+})
+
+router.get('/:id/actions', (req, res) => {
+  Projects.getProjectActions(req.project.id)
+    .then((actions) => {
+      res.status(200).json(actions)
+    })
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json({ message: err.message })
+    })
+})
 
 
 /* This file needs: 
