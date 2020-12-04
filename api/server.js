@@ -11,6 +11,7 @@ const helmet = require('helmet');
 
 server.use(helmet());
 server.use(express.json());
+// server.use('/api/actions', actionsRouter);
 
 
 server.get('/', (req, res) => {
@@ -23,8 +24,9 @@ server.get('*', (req, res) => {
     res.status(404).json({ message: "The requested resource could not be found." })
 });
 
-// server.use((error, req, res, next) => {
-//     res.status(500).json({ message: error.message })
-// })
+server.use((error, req, res, next) => {
+    res.status(500).json({ message: error.message })
+    next();
+})
 
 module.exports = server;
