@@ -2,7 +2,6 @@
 const express = require('express');
 
 const Actions = require('./actions-model');
-// const Projects = require('../projects/projects-model');
 
 const router = express.Router();
 
@@ -62,6 +61,10 @@ router.delete('/:id', (req, res) => {
     })
 });
 
+///// CATCH-ALL /////
+router.use((err, req, res, next) => {
+  res.status(500).json({ message: err.message })
+});
 
 
 module.exports = router;

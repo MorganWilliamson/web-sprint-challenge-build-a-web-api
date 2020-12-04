@@ -6,12 +6,12 @@ const helmet = require('helmet');
 // Do NOT `server.listen()` inside this file!
 
 /////// UNCOMMENT THIS //////// 
-// const actionsRouter = require('./actions/actions-router')
+const actionsRouter = require('./actions/actions-router')
 // const projectsRouter = require('./projects/projects-router')
 
 server.use(helmet());
 server.use(express.json());
-// server.use('/api/actions', actionsRouter);
+server.use('/api/actions', actionsRouter);
 
 
 server.get('/', (req, res) => {
