@@ -45,7 +45,7 @@ router.put('/api/projects/:id', (req, res) => {
       if (id) {
         res.status(200).json(id)
       } else {
-        res.status(404).json({ message: "Project with that ID cannot be found." })
+        res.status(400).json({ message: "Project with that ID cannot be found." })
       }
     })
     .catch((err) => {
