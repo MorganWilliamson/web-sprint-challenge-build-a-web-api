@@ -7,8 +7,9 @@ const router = express.Router();
 
 ///// ENDPOINTS /////
 router.get('/', (req, res) => {
-  Actions.get(req.query)
+  Actions.get(req.body)
     .then((actions) => {
+      console.log(actions)
       res.status(200).json(actions)
     })
     .catch((err) => {
@@ -61,10 +62,11 @@ router.delete('/:id', (req, res) => {
     })
 });
 
-///// CATCH-ALL /////
-// router.use((err, req, res, next) => {
-//   res.status(500).json({ message: err.message })
-// });
+/// CATCH-ALL /////
+router.use((err, req, res, next) => {
+  res.status(500).json({ message: err.message })
+  return next();
+});
 
 
 module.exports = router;
