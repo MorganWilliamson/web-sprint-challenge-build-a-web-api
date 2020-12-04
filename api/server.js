@@ -6,12 +6,13 @@ const helmet = require('helmet');
 // Do NOT `server.listen()` inside this file!
 
 /////// UNCOMMENT THIS //////// 
-const actionsRouter = require('./actions/actions-router')
+// const actionsRouter = require('./actions/actions-router.js')
 // const projectsRouter = require('./projects/projects-router')
 
 server.use(helmet());
 server.use(express.json());
-server.use('/api/actions', actionsRouter);
+// server.use('/api/actions', actionsRouter);
+// server.use('/api/projects', projectsRouter);
 
 
 server.get('/', (req, res) => {
@@ -24,9 +25,5 @@ server.get('*', (req, res) => {
     res.status(404).json({ message: "The requested resource could not be found." })
 });
 
-server.use((error, req, res, next) => {
-    res.status(500).json({ message: error.message })
-    next();
-})
 
 module.exports = server;
