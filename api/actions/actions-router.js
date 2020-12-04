@@ -6,7 +6,7 @@ const Actions = require('./actions-model');
 const router = express.Router();
 
 ///// ENDPOINTS /////
-router.get('/', (req, res) => {
+router.get('/api/actions/', (req, res) => {
   Actions.get(req.query)
     .then((actions) => {
       res.status(200).json(actions)
@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
     })
 });
 
-router.get('/:id', (req, res) => {
+router.get('/api/actions/:id', (req, res) => {
   Actions.get(req.params.id)
     .then((action) => {
       res.status(200).json(action)
@@ -28,7 +28,7 @@ router.get('/:id', (req, res) => {
     })
 });
 
-router.post('/', (req, res) => {
+router.post('/api/actions/', (req, res) => {
   Actions.insert({...req.body, id: req.params.id})
     .then((action) => {
       res.status(201).json(action)
@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
     })
 });
 
-router.put('/:id', (req, res) => {
+router.put('/api/actions/:id', (req, res) => {
   Actions.update(req.params.id, req.body)
     .then(() => {
       res.status(200).json({ data: req.body })
@@ -50,7 +50,7 @@ router.put('/:id', (req, res) => {
     })
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/api/actions/:id', (req, res) => {
   Actions.remove(req.params.id)
     .then(() => {
       res.status(200).json({ message: "Successfully deleted resource." })
