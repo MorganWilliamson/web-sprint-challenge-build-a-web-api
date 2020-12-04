@@ -5,7 +5,7 @@ const server = express();
 // Do NOT `server.listen()` inside this file!
 
 const actionsRouter = require('./actions/actions-router.js')
-// const projectsRouter = require('./projects/projects-router')
+const projectsRouter = require('./projects/projects-router.js')
 
 const middleware = (req, res, next) => {
     console.log(`Ping at: ${req.query}`)
@@ -15,7 +15,7 @@ const middleware = (req, res, next) => {
 
 server.use(express.json());
 server.use('/api/actions', middleware, actionsRouter);
-// server.use('/api/projects', middleware, projectsRouter);
+server.use('/api/projects', middleware, projectsRouter);
 
 
 server.get('/', (_, res) => {

@@ -5,11 +5,31 @@ const Projects = require('./projects-model');
 
 const router = express.Router();
 
+//// Local Middleware ////
+const checkProjectID = (req, res, next) => {
+  Projects.get(req.params.id)
+    .then((project) => {
+      if (project) {
+        req.project = project;
+        next();
+      } else {
+        next();
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+      next();
+    })
+}
+
+
+
 ///// ENDPOINTS /////
+// - [*] `[GET] /api/projects` sends an array of projects (or an empty array) as the body of the response.
 router.get('/', (req, res) => {
   Projects.get()
-    .then((project) => {
-      res.status(200).json(project)
+    .then((projects) => {
+      res.status(200).json(projects)
     })
     .catch((err) => {
       console.log(err)
@@ -17,6 +37,7 @@ router.get('/', (req, res) => {
     })
 })
 
+// - [*] `[GET] /api/projects/:id` sends a project with the given `id` as the body of the _response_.
 router.get('/:id', (req, res) => {
   Projects.get(req.params.id)
     .then((project) => {
@@ -28,6 +49,7 @@ router.get('/:id', (req, res) => {
     })
 })
 
+// - [*] `[POST] /api/projects` sends the newly created project as the body of the _response_.
 router.post('/', (req, res) => {
   Projects.insert(req.body)
     .then((project) => {
@@ -39,14 +61,11 @@ router.post('/', (req, res) => {
     })
 })
 
-router.put('/:id', (req, res) => {
-  Projects.update(req.params.id, req.body)
-    .then((id) => {
-      if (id) {
-        res.status(200).json(id)
-      } else {
-        res.status(400).json({ message: "Project with that ID cannot be found." })
-      }
+// - [*] `[PUT] /api/projects` sends the updated project as the body of the _response_.
+router.put('/:id', checkProjectID, (req, res) => {
+  Projects.update(req.project.id, req.body)
+    .then((project) => {
+      res.status(200).json(project)
     })
     .catch((err) => {
       console.log(err)
@@ -54,7 +73,8 @@ router.put('/:id', (req, res) => {
     })
 })
 
-router.delete('/:id', (req, res) => {
+// - [*] `[DELETE] /api/projects` sends no _response_ body.
+router.delete('/:id', checkProjectID, (req, res) => {
   Projects.remove(req.params.id)
     .then(() => {
       res.status(200).json({ message: "Project successfully deleted." })
@@ -65,7 +85,8 @@ router.delete('/:id', (req, res) => {
     })
 })
 
-router.get('/:id/actions', (req, res) => {
+// - [*] `[GET] /api/projects/:id/actions` sends an array of actions (or an empty array) as the body of the response.
+router.get('/:id/actions', checkProjectID, (req, res) => {
   Projects.getProjectActions(req.project.id)
     .then((actions) => {
       res.status(200).json(actions)
@@ -76,6 +97,13 @@ router.get('/:id/actions', (req, res) => {
     })
 })
 
+///// CATCH-ALL /////
+router.use((err, req, res, next) => {
+  res.status(500).json({ message: err.message })
+  next();
+});
+
+module.exports = router;
 
 /* This file needs: 
 - [ ] Inside `api/projects/projects-router.js` build endpoints for performing CRUD operations on _projects_:

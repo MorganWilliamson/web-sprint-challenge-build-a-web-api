@@ -71,7 +71,7 @@ router.delete('/:id', (req, res) => {
 /// CATCH-ALL /////
 router.use((err, req, res, next) => {
   res.status(500).json({ message: err.message })
-  return next();
+  next();
 });
 
 
