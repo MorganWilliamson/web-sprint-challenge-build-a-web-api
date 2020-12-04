@@ -57,25 +57,30 @@ We have provided test data for all the resources.
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
-1. Understand and explain the use of Middleware.
-1. The basic principles of the REST architectural style.
-1. Understand and explain the use of Express Routers.
-1. Describe tooling used to manually test the correctness of an API.
+A: Node.js is a run-time environment, meant to handle the interactions between our front-end and back-end. Express is a framework made specifically for Node.js, meant to improve the features already built into Node.js. Node also doesn't block processes, which makes it easier to keep things running more fluidly and without a hitch to the end user's experience.
+2. Understand and explain the use of Middleware.
+A: Middleware is all about flexibility and enhancement. As data comes through the pipeline, custom middleware can be implemented to enhance authentication/security, or even be used to help keep our code DRY. 
+3. The basic principles of the REST architectural style.
+A: Usage of URIs (guarantees the app/client can always hit the same location and get the same info), Statelessness (provides all the info the client needs), adhering to the agreed upon Client-Server model (ensuring that the database matches the correct schema), caching (storing data client-side whenever possible, but refreshing that cache whenever nevessary), layered architecture (understanding how the different layers of a stack interact with each other, and outlining their appropriate separation of concerns). 
+4. Understand and explain the use of Express Routers.
+A: Express Routers build on top of the routing we already use, and allow us to perform authentication and error handling in the same routing. 
+5. Describe tooling used to manually test the correctness of an API.
+A: HTTPie, Postman, Insomnia, etc. Check the individual endpoints and the accompanying actions of each endpoint, ensuring that all pieces of a web app are functioning as expected (whether that's giving the correct data back, or returning the correct error.)
 
 ## Instructions
 
 ### Project Structure and Dependencies
 
-- [ ] Do not move or rename existing files or folders.
-- [ ] All necessary libraries are already installed in the project.
+- [*] Do not move or rename existing files or folders.
+- [*] All necessary libraries are already installed in the project.
 
 ### Task 1: Project Set Up
 
-- [ ] Create a forked copy of this project.
-- [ ] Clone your OWN version of the repository (Not Lambda's by mistake!).
-- [ ] Create a new branch: `git checkout -b <firstName-lastName>`.
-- [ ] Implement the project on your newly created `<firstName-lastName>` branch.
-- [ ] Commit & push your code regularly and meaningfully.
+- [*] Create a forked copy of this project.
+- [*] Clone your OWN version of the repository (Not Lambda's by mistake!).
+- [*] Create a new branch: `git checkout -b <firstName-lastName>`.
+- [*] Implement the project on your newly created `<firstName-lastName>` branch.
+- [*] Commit & push your code regularly and meaningfully.
 
 ### Task 2: Project Requirements
 
@@ -85,9 +90,9 @@ Your finished project must include all of the following requirements:
 
 A _"test"_ script already exists you can use to run tests against your code.
 
-- [ ] Write an _npm script_ named _"start"_ that uses `node` to run the API server.
-- [ ] Write an _npm script_ named _"server"_ that uses `nodemon`to run the API server.
-- [ ] Use _nodemon_ as a development time dependency only that is not deployed to production.
+- [*] Write an _npm script_ named _"start"_ that uses `node` to run the API server.
+- [*] Write an _npm script_ named _"server"_ that uses `nodemon`to run the API server.
+- [*] Use _nodemon_ as a development time dependency only that is not deployed to production.
 
 #### Build an API
 
