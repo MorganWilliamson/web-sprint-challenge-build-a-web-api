@@ -6,7 +6,7 @@ const Projects = require('./projects-model');
 const router = express.Router();
 
 ///// ENDPOINTS /////
-router.get('/', (req, res) => {
+router.get('/api/projects/', (req, res) => {
   Projects.get()
     .then((project) => {
       res.status(200).json(project)
@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/:id', (req, res) => {
+router.get('/api/projects/:id', (req, res) => {
   Projects.get(req.params.id)
     .then((project) => {
       res.status(200).json(project)
@@ -28,7 +28,7 @@ router.get('/:id', (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
+router.post('/api/projects/', (req, res) => {
   Projects.insert(req.body)
     .then((project) => {
       res.status(201).json(project)
@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
     })
 })
 
-router.put('/:id', (req, res) => {
+router.put('/api/projects/:id', (req, res) => {
   Projects.update(req.params.id, req.body)
     .then((id) => {
       if (id) {
@@ -54,7 +54,7 @@ router.put('/:id', (req, res) => {
     })
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/api/projects/:id', (req, res) => {
   Projects.remove(req.params.id)
     .then(() => {
       res.status(200).json({ message: "Project successfully deleted." })
@@ -65,7 +65,7 @@ router.delete('/:id', (req, res) => {
     })
 })
 
-router.get('/:id/actions', (req, res) => {
+router.get('/api/projects/:id/actions', (req, res) => {
   Projects.getProjectActions(req.project.id)
     .then((actions) => {
       res.status(200).json(actions)
