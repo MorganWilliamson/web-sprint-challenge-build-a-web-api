@@ -24,9 +24,9 @@ server.get('/', (_, res) => {
         `)
 });
 
-// server.get('*', (req, res) => {
-//     res.status(404).json({ message: "The requested resource could not be found." })
-// });
+server.get('*', (req, res) => {
+    res.status(404).json({ message: "The requested resource could not be found." })
+});
 
 server.use((error, req, res, next) => {
     res.status(500).json({ message: error.message })
