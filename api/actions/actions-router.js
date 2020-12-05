@@ -49,7 +49,7 @@ router.get('/:id', (req, res) => {
     })
     .catch((err) => {
       console.log(err)
-      res.status(500).json({ message: "Error retrieving action with the specified ID." })
+      res.status(404).json({ message: "Error retrieving action with the specified ID." })
     })
   }
 });
@@ -90,7 +90,7 @@ router.delete('/:id', checkActionID, (req, res) => {
     })
     .catch((err) => {
       console.log(err)
-      res.status(500).json({ message: "This resource cannot be deleted." })
+      res.status(404).json({ message: "This resource cannot be deleted." })
     })
 });
 
